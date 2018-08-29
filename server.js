@@ -21,6 +21,7 @@ function newConnection(socket) {
   socket.on('player', playerMessage);
 
   function playerMessage(data) {
+    data.id = socket.id;
     socket.broadcast.emit('player', data);
 
     // this emits to every other socket and itself

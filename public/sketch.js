@@ -3,7 +3,7 @@ var player;
 var food = [];
 var foodCount = 50;
 let socket;
-let otherPlayer;
+let otherPlayers = [];
 function setup() {
   createCanvas(400, 400);
   player = new Player();
@@ -19,7 +19,17 @@ function newDrawing(data) {
   noFill();
   stroke(255);
 
-  otherPlayer = data;
+  let exists = false;
+  for (let i = 0; i < otherPlayers.length; i ++) {
+    if (otherPlayers[i].id == data.id) {
+      otherPlayers[i] = data;
+      exists = true;
+    }
+  }
+
+  if (!exists) {
+    otherPlayers.push(data);
+  }
 
 }
 
@@ -32,18 +42,20 @@ function draw() {
     food[i].display();
   }
 
-  push();
-  console.log("drawing other player");
-  stroke(255);
-  noFill();
-  if (otherPlayer) {
-    translate(otherPlayer.x, otherPlayer.y);
+
+  for (let i = 0; i < otherPlayers.length; i++) {
+    push();
+    stroke(255);
+    noFill();
+    translate(otherPlayers[i].x, otherPlayers[i].y);
     triangle(-20, 20, 20, 20, 0, -20);
+    pop();
   }
+
   // this.radians = atan2(mouseY-this.pos.y, mouseX-this.pos.x);
 
   // rotate(this.radians + HALF_PI);
-  pop();
+
 
 
 
