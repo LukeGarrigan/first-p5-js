@@ -1,0 +1,24 @@
+{
+  "name": "first-game",
+  "version": "1.0.0",
+  "description": "Trying to connect to server",
+  "main": "food.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukeGarrigan/first-p5-js.git"
+  },
+  "author": "Luke Garrigan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukeGarrigan/first-p5-js/issues"
+  },
+  "homepage": "https://github.com/LukeGarrigan/first-p5-js#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "^2.1.1"
+  }
+}
