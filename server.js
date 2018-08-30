@@ -10,7 +10,7 @@ var port = process.env.PORT || 8080;
 let server = app.listen(port);
 
 // to include my little game
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('/public'));
 
 console.log("My socket server is a go.");
 
