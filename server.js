@@ -5,7 +5,7 @@ let app = express();
 let server = app.listen(3000);
 
 // to include my little game
-app.use(express.static('public'));
+app.use(express.static('/public'));
 
 console.log("My socket server is a go.");
 
