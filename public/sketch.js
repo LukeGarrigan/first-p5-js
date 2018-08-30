@@ -4,12 +4,11 @@ var food = [];
 var foodCount = 50;
 let socket;
 let otherPlayers = [];
-var port = process.env.PORT || 8080;
 
 function setup() {
   createCanvas(400, 400);
   player = new Player();
-  socket = io.connect("http://localhost:" + port);
+  socket = io.connect('http://first-game-online.herokuapp.com/');
 
   for (var i = 0; i < foodCount; i++) {
     food.push(new Food());
