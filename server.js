@@ -5,12 +5,12 @@ let app = express();
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
-var port = process.env.PORT || 8080;
+// var port = process.env.PORT || 8080;
 
-let server = app.listen(port);
+let server = app.listen(3000);
 
 // to include my little game
-app.use(express.static('/public'));
+app.use(express.static('public'));
 
 console.log("My socket server is a go.");
 

@@ -7,8 +7,9 @@ let otherPlayers = [];
 
 function setup() {
   createCanvas(400, 400);
+  console.log("Running setup method");
   player = new Player();
-  socket = io.connect('http://first-game-online.herokuapp.com/');
+  socket = io.connect('http://codeheir.com:3000');
 
   for (var i = 0; i < foodCount; i++) {
     food.push(new Food());
