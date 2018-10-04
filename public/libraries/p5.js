@@ -50033,7 +50033,7 @@ p5.Renderer = function(elt, pInst, isMainCanvas) {
     this._pInst._setProperty('height', this.height);
   } else {
     // hide if offscreen buffer by default
-    this.canvas.style.display = 'none';
+    Blob.display = 'none';
     this._styles = []; // non-main elt styles stored in p5.Renderer
   }
 
@@ -50200,7 +50200,7 @@ p5.Renderer.prototype._updateTextMetrics = function() {
   text.innerHTML = 'ABCjgq|';
 
   var block = document.createElement('div');
-  block.style.display = 'inline-block';
+  Blob.display = 'inline-block';
   block.style.width = '1px';
   block.style.height = '0px';
 
@@ -61173,7 +61173,7 @@ p5.prototype.downloadFile = function(data, fName, extension) {
     e.stopPropagation();
   };
 
-  a.style.display = 'none';
+  Blob.display = 'none';
   document.body.appendChild(a);
 
   // Safari will open this file in the same page as a confusing Blob.

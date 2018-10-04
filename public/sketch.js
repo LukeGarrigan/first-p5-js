@@ -1,91 +1,73 @@
+let circles = [];
+let relationships = [];
+let currentlyClicked;
 
-var player;
-var food = [];
-var foodCount = 50;
-let socket;
-let otherPlayers = [];
+let currentlyHeld;
+let isHeld = false;
 
 function setup() {
-  createCanvas(400, 400);
-  console.log("Running setup method");
-  player = new Player();
-  socket = io.connect('http://codeheir.com:3000');
+    createCanvas(window.innerWidth, window.innerHeight);
 
-  for (var i = 0; i < foodCount; i++) {
-    food.push(new Food());
-  }
-  socket.on('player', newDrawing);
-}
-
-function newDrawing(data) {
-  noFill();
-  stroke(255);
-
-  let exists = false;
-  for (let i = 0; i < otherPlayers.length; i ++) {
-    if (otherPlayers[i].id == data.id) {
-      otherPlayers[i] = data;
-      exists = true;
+    for (let i = 0; i < 30; i++) {
+        let circle = new Blob(random(window.innerWidth), random(window.innerHeight));
+        circles.push(circle);
     }
-  }
-
-  if (!exists) {
-    otherPlayers.push(data);
-  }
-
 }
 
 
 function draw() {
-  background(0);
-  fill(255);
-  player.update();
-  for (var i = 0; i < food.length; i++) {
-    food[i].display();
-  }
+    background(116);
 
+    if (isHeld && currentlyHeld !== null) {
+        currentlyHeld.x = mouseX;
+        currentlyHeld.y = mouseY;
+    }
 
-  for (let i = 0; i < otherPlayers.length; i++) {
-    push();
-    stroke(255);
-    noFill();
-    translate(otherPlayers[i].x, otherPlayers[i].y);
-    triangle(-20, 20, 20, 20, 0, -20);
-    pop();
-  }
+    for (let i = 0; i < relationships.length; i++) {
+        relationships[i].display();
+    }
 
-  // this.radians = atan2(mouseY-this.pos.y, mouseX-this.pos.x);
-
-  // rotate(this.radians + HALF_PI);
-
-
-
-
-
-  let data = {
-    x: player.pos.x,
-    y: player.pos.y
-  }
-
-  socket.emit('player', data);
+    for (let i = 0; i < circles.length; i++) {
+        circles[i].display();
+    }
 }
 
 
-function keyPressed() {
-  if (keyCode == UP_ARROW) {
-    player.up();
-  }
+function mouseClicked() {
 
-  if (keyCode == LEFT_ARROW) {
-    player.left();
-  }
+    console.log("clicked");
+    for (let i = 0; i < circles.length; i++) {
+        let justBeenClicked = circles[i].processBeingClicked(mouseX, mouseY, currentlyClicked, relationships);
+
+        if (justBeenClicked !== undefined) {
+            currentlyClicked = justBeenClicked;
+        }
+    }
+
+
 }
 
-function keyReleased() {
-  if (keyCode == LEFT_ARROW) {
-    player.releaseLeft();
-  }
-  if (keyCode == UP_ARROW) {
-    player.releaseUp();
-  }
+
+function mousePressed() {
+    console.log("held");
+    isHeld = true;
+    for (let i = 0; i < circles.length; i++) {
+        if (dist(mouseX, mouseY, circles[i].x, circles[i].y) < circles[i].r / 2) {
+            currentlyHeld = circles[i];
+            circles[i].x = mouseX;
+            circles[i].y = mouseY;
+        }
+    }
+
 }
+
+function mouseReleased() {
+    isHeld = false;
+    if (currentlyHeld !== null) {
+        currentlyHeld.reset();
+        currentlyHeld = null;
+    }
+
+}
+
+

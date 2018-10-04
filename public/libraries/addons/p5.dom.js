@@ -1318,10 +1318,10 @@
 
     if (hidden) this.show();
 
-    this.elt.style.display = 'block';
+    Blob.display = 'block';
     this.position(0, 0);
 
-    if (parentHidden) this.parent().style.display = 'block';
+    if (parentHidden) Blob.display = 'block';
 
     var wOffset = Math.abs(this.parent().offsetWidth - this.elt.offsetWidth);
     var hOffset = Math.abs(this.parent().offsetHeight - this.elt.offsetHeight);
@@ -1340,7 +1340,7 @@
 
     if (hidden) this.hide();
 
-    if (parentHidden) this.parent().style.display = 'none';
+    if (parentHidden) Blob.display = 'none';
 
     return this;
   };
@@ -1708,7 +1708,7 @@
    * </code></div>
    */
   p5.Element.prototype.show = function() {
-    this.elt.style.display = 'block';
+    Blob.display = 'block';
     return this;
   };
 
@@ -1724,7 +1724,7 @@
    * </code></div>
    */
   p5.Element.prototype.hide = function() {
-    this.elt.style.display = 'none';
+    Blob.display = 'none';
     return this;
   };
 
